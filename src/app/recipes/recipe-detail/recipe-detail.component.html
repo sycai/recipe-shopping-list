@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-12">
     <img 
       [src]="recipe.imagePath" 
       alt="{{ recipe.name }}" 
@@ -9,17 +9,17 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-12">
     <h1>{{ recipe.name }}</h1>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-12">
     <div ngbDropdown class="d-inline-block">
       <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Manage Recipe</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="dropdown-item">To Shopping List</button>
+        <button class="dropdown-item" (click)="onAddToShoppingList()">To Shopping List</button>
         <button class="dropdown-item">Edit Recipe</button>
         <button class="dropdown-item">Delete Recipe</button>
       </div>
@@ -28,13 +28,16 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-12">
     {{ recipe.description }}
   </div>
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
-      Ingredients
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients"> 
+          {{ ingredient.name }} - {{ ingredient.amount }}</li>
+      </ul>
     </div>
 </div>
