@@ -14,6 +14,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { InfoTextComponent } from './recipes/info-text/info-text.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     RecipeDetailComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    InfoTextComponent
   ],
   imports: [
     BrowserModule,
