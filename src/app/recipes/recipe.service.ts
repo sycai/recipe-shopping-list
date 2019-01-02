@@ -35,10 +35,7 @@ export class RecipeService {
   }
 
   getRecipe(id: number) {
-    const recipe = this.recipes.find(
-      (r) => r.id === id
-    );
-    return new Recipe(recipe.id, recipe.name, recipe.description, recipe.imagePath, recipe.ingredients.slice());
+    return this.recipes.find((r) => r.id === id);
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
