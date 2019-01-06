@@ -30,9 +30,19 @@
           <button 
             class="btn btn-success mr-2" 
             type="submit"
-            [disabled]="!f.valid">Add</button>
-          <button class="btn btn-danger mr-2" type="button">Delete</button>
-          <button class="btn btn-primary mr-2" type="button">Clear</button>
+            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+
+          <button 
+            class="btn btn-danger mr-2" 
+            type="button"
+            (click)="onDelete()"
+            *ngIf="editMode">Delete</button>
+
+          <button 
+            class="btn btn-primary mr-2" 
+            type="button"
+            (click)="onCancel()"
+            *ngIf="f.touched || editMode">Cancel</button>
         </div>
       </div>
     </form>
