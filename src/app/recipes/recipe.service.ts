@@ -1,5 +1,5 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
@@ -55,6 +55,11 @@ export class RecipeService {
       r.id === recipe.id
     );
     this.recipes[index] = recipe;
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  deleteRecipe(id: number) {
+    this.recipes = this.recipes.filter((r: Recipe) => r.id !== id);
     this.recipesChanged.next(this.getRecipes());
   }
 }
