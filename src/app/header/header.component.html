@@ -25,8 +25,8 @@
               class="nav-link"
               style="cursor: pointer">Manage</a>
             <div ngbDropdownMenu aria-labelledby="manageDropdown">
-              <a class="dropdown-item" style="cursor: pointer">Save data</a>
-              <a class="dropdown-item" style="cursor: pointer">Fetch data</a>
+              <a class="dropdown-item" style="cursor: pointer" (click)="onSaveData()">Save data</a>
+              <a class="dropdown-item" style="cursor: pointer" (click)="onFetchData()">Fetch data</a>
             </div>
           </div>
         </li>
