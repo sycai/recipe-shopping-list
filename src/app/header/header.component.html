@@ -26,8 +26,11 @@
           <li class="navbar-item">
             <a routerLink="/signin" class="nav-link">Login</a>
           </li>
-
         </ng-template>
+
+        <li class="navbar-item" *ngIf="authService.isAuthenticated()">
+          <a style="cursor: pointer;" class="nav-link" (click)="onLogout()">Log Out</a>
+        </li>
 
         <li class="navbar-item" *ngIf="authService.isAuthenticated()">
           <div ngbDropdown placement="bottom-right">
