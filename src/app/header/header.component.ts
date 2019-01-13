@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
 import { Response } from '@angular/http';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private router: Router) {}
 
   onSaveData() {
     this.dataStorageService.storeRecipes().subscribe(
@@ -25,5 +27,6 @@ export class HeaderComponent {
 
   onLogout() {
     this.authService.logOut();
+    this.router.navigate(['/']);
   }
 }
