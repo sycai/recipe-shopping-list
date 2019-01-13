@@ -8,7 +8,11 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" ngModel class="form-control">
+        <input type="password" id="password" name="password" ngModel class="form-control" minlength="6" required
+          #password="ngModel">
+        <span class="form-text text-muted" *ngIf="password.errors && password.errors.minlength">
+          Password must contain at least 6 characters.
+        </span>
       </div>
 
       <button class="btn btn-primary" type="submit">Sign Up</button>
