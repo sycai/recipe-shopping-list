@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent} from './header/header.component';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
@@ -15,18 +14,17 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
-import { HomeComponent } from './home/home.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     NgbModule,
+    CoreModule,
     ShoppingListModule,
     AuthModule,
     AppRoutingModule,
