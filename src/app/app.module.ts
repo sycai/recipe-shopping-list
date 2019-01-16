@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
     ShoppingListModule,
     AuthModule,
     AppRoutingModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

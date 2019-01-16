@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpParams, HttpRequest} from '@angular/common/http';
 import { RecipeService } from '../recipes/recipe.service';
 import { Resources } from './resources';
 import { Recipe } from '../recipes/recipe.model';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
   constructor(
-    private http: Http,
-    private recipeService: RecipeService,
-    private authService: AuthService) {}
+    private httpClient: HttpClient,
+    private recipeService: RecipeService) {}
 
   storeRecipes() {
-    const token = this.authService.getToken();
-    return this.http.put(Resources.url + '/recipes.json?auth=' + token, this.recipeService.getRecipes());
+    const req = new HttpRequest(
+      'PUT',
+      Resources.url + '/recipes.json',
+      this.recipeService.getRecipes(),
+      { reportProgress: true }
+    );
+    return this.httpClient.request(req);
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-
-    this.http.get(Resources.url + '/recipes.json?auth=' + token)
-      .pipe(map((response: Response) => {
-        const recipes: Recipe[] = response.json();
+    this.httpClient.get<Recipe[]>(Resources.url + '/recipes.json').pipe(map((recipes) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];
