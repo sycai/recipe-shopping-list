@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
 
-        <ng-template [ngIf]="!isAuthenticated()">
+        <ng-template [ngIf]="!(authState | async).authenticated">
           <li class="navbar-item">
             <a routerLink="/signup" class="nav-link">Register</a>
           </li>
@@ -28,11 +28,11 @@
           </li>
         </ng-template>
 
-        <li class="navbar-item" *ngIf="isAuthenticated()">
+        <li class="navbar-item" *ngIf="(authState | async).authenticated">
           <a style="cursor: pointer;" class="nav-link" (click)="onLogout()">Log Out</a>
         </li>
 
-        <li class="navbar-item" *ngIf="isAuthenticated()">
+        <li class="navbar-item" *ngIf="(authState | async).authenticated">
           <div ngbDropdown placement="bottom-right">
             <a id="manageDropdown" ngbDropdownToggle class="nav-link" style="cursor: pointer">Manage</a>
             <div ngbDropdownMenu aria-labelledby="manageDropdown">
