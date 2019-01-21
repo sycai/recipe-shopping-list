@@ -1,4 +1,5 @@
 import * as AuthActions from './auth.actions';
+import * as firebase from 'firebase';
 
 export interface State {
   token: string;
@@ -20,6 +21,7 @@ export function authReducers(state: State = initialState, action: AuthActions.Au
       };
 
     case AuthActions.LOG_OUT:
+      firebase.auth().signOut();
       return {
         ...state,
         token: null,
