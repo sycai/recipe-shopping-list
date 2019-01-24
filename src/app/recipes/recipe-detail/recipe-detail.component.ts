@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducers';
+import { Observable } from 'rxjs';
+import * as fromRecipe from '../store/recipe.reducers';
+import { take } from 'rxjs/operators';
+import * as ReciepActions from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -13,22 +14,26 @@ import * as fromApp from '../../store/app.reducers';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  @Input() recipe: Recipe;
+  id: number;
+  recipeState: Observable<fromRecipe.State>;
 
   constructor(
-    private recipeService: RecipeService,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>) { }
+    private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => this.recipe = this.recipeService.getRecipe(+params['id'])
-    );
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.recipeState = this.store.select('recipes');
+    });
   }
 
   onAddToShoppingList() {
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.select('recipes').pipe(take(1)).subscribe(
+      (recipeState: fromRecipe.State) =>
+        this.store.dispatch(new ShoppingListActions.AddIngredients(recipeState.recipes[this.id].ingredients)
+    ));
   }
 
   onEditRecipe() {
@@ -36,8 +41,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.recipe.id);
+    this.store.dispatch(new ReciepActions.DeleteRecipe(this.id));
     this.router.navigate(['../'], {relativeTo: this.route});
   }
-
 }
